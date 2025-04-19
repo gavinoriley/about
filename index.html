@@ -1,5 +1,16 @@
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Hamachi the Psychotic Killer</title>
     <style>
+        @font-face {
+            font-family: 'FSEX300';
+            src: url('https://gavinoriley.github.io/assets/FSEX300.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body {
             background-image:
                 linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,1) 100%),
@@ -9,6 +20,51 @@
             background-color: black;
             background-attachment: fixed;
             min-height: 100vh;
+            color: white;
+            font-family: 'FSEX300', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content {
+            max-width: 800px; /* Increased to accommodate images side by side */
+            padding: 20px;
+            text-align: center; /* Center-align content */
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Space between the two images */
+            margin-bottom: 20px; /* Space between images and text */
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            background: transparent !important; /* Consistent with homepage image styling */
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            color: white;
+            text-shadow: 1px 1px 2px black;
+            max-width: 600px; /* Limit text width for readability */
+            margin: 0 auto; /* Center the text */
         }
     </style>
 </head>
+<body>
+    <div class="content">
+        <div class="image-container">
+            <img src="https://gavinoriley.github.io/assets/endscreengame.png" alt="End Screen Game">
+            <img src="https://gavinoriley.github.io/assets/0normal.png" alt="Normal Scene">
+        </div>
+        <p>In this platformer, the roles are reversed. Instead of playing the good guy, you’re the bad guy, and your goal is to kill everything in your path… but of course, you don’t have to.</p>
+    </div>
+</body>
+</html>
