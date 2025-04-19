@@ -12,13 +12,7 @@
         }
 
         body {
-            background-image:
-                linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,1) 100%),
-                url('https://gavinoriley.github.io/assets/blankhamachi_hero.png');
-            background-size: cover;
-            background-position: center;
             background-color: black;
-            background-attachment: fixed;
             min-height: 100vh;
             color: white;
             font-family: 'FSEX300', Arial, sans-serif;
@@ -30,31 +24,31 @@
         }
 
         .content {
-            max-width: 800px; /* Increased to accommodate images side by side */
+            max-width: 600px; /* Reduced from 800px to create more dead space on the sides */
             padding: 20px;
-            text-align: center; /* Center-align content */
+            text-align: center;
         }
 
         .image-container {
             display: flex;
             justify-content: center;
-            gap: 20px; /* Space between the two images */
-            margin-bottom: 20px; /* Space between images and text */
+            gap: 20px;
+            margin-bottom: 20px;
         }
 
         .image-container img {
-            max-width: 100%;
-            height: auto;
-            background: transparent !important; /* Consistent with homepage image styling */
+            max-width: 100%; /* Restored original width */
+            height: auto; /* Restored original height behavior */
+            background: transparent !important;
         }
 
         p {
-            font-size: 16px;
+            font-size: 18px;
             line-height: 1.5;
             color: white;
             text-shadow: 1px 1px 2px black;
-            max-width: 600px; /* Limit text width for readability */
-            margin: 0 auto; /* Center the text */
+            max-width: 600px;
+            margin: 0 auto;
         }
     </style>
 </head>
