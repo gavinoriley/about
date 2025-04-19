@@ -19,13 +19,25 @@
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+        }
+
+        .logo {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .logo img {
+            max-width: 500px; /* Increased from 400px to 500px */
+            height: auto;
+            background: transparent !important;
         }
 
         .content {
             max-width: 600px;
             padding: 20px;
+            padding-top: 100px;
             text-align: center;
         }
 
@@ -55,6 +67,9 @@
     </style>
 </head>
 <body>
+    <div class="logo">
+        <img src="https://gavinoriley.github.io/assets/Z4ow1Dt.png" alt="Hamachi Logo">
+    </div>
     <div class="content">
         <div class="image-container">
             <img src="https://gavinoriley.github.io/assets/0normal.png" alt="Normal Scene">
