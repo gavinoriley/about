@@ -23,13 +23,37 @@
             align-items: center;
         }
 
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            z-index: 100;
+        }
+
+        .nav-bar a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        .nav-bar a:hover {
+            text-decoration: underline;
+        }
+
         .logo {
-            margin-top: 50px;
+            margin-top: 90px;
             text-align: center;
         }
 
         .logo img {
-            max-width: 500px; /* Increased from 400px to 500px */
+            max-width: 500px;
             height: auto;
             background: transparent !important;
         }
@@ -67,6 +91,12 @@
     </style>
 </head>
 <body>
+    <div class="nav-bar">
+        <a href="https://hamachithepsychotickiller.com">HOME</a>
+        <a href="https://store.steampowered.com/news/app/3355690/view/520837042930712593">READ DEVLOG</a>
+        <a href="https://hamachithepsychotickiller.com/about/">ABOUT</a>
+        <a href="https://store.steampowered.com/app/3355690/Hamachi_the_Psychotic_Killer/">BUY NOW</a>
+    </div>
     <div class="logo">
         <img src="https://gavinoriley.github.io/assets/Z4ow1Dt.png" alt="Hamachi Logo">
     </div>
