@@ -24,7 +24,7 @@
         }
 
         .content {
-            max-width: 600px; /* Reduced from 800px to create more dead space on the sides */
+            max-width: 600px;
             padding: 20px;
             text-align: center;
         }
@@ -37,9 +37,23 @@
         }
 
         .image-container img {
-            max-width: 100%; /* Restored original width */
-            height: auto; /* Restored original height behavior */
+            max-width: 100%;
+            height: auto;
             background: transparent !important;
+            box-shadow: 0 0 10px #ff0000;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container img:first-child {
+            transform: rotate(3deg);
+        }
+
+        .image-container img:last-child {
+            transform: rotate(-3deg);
+        }
+
+        .image-container img:hover {
+            transform: rotate(0deg);
         }
 
         p {
