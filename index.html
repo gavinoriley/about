@@ -143,34 +143,51 @@
         <img src="https://gavinoriley.github.io/assets/sprnose.png" alt="Back to Top">
     </a>
     <script>
+        // Select the back-to-top element and its image
         const backToTop = document.querySelector('.back-to-top');
+        const backToTopImg = backToTop.querySelector('img');
+        let imageHeight = 0;
 
-        // Function to update the hand's position based on scroll
+        // Get the image height once it’s loaded
+        if (backToTopImg.complete) {
+            imageHeight = backToTopImg.clientHeight;
+        } else {
+            backToTopImg.addEventListener('load', () => {
+                imageHeight = backToTopImg.clientHeight;
+                updateBackToTop(); // Update position after image loads
+            });
+        }
+
         function updateBackToTop() {
+            // Calculate scroll metrics
             const scrollHeight = document.documentElement.scrollHeight;
-            const clientHeight = document.documentElement.clientHeight;
+            const clientHeight = window.innerHeight;
             const scrollTop = window.scrollY;
             const maxScroll = scrollHeight - clientHeight;
 
-            if (maxScroll > 0) { // Ensure the page is scrollable
+            if (maxScroll > 0) { // Only proceed if the page is scrollable
                 const scrollPercent = scrollTop / maxScroll;
                 let bottom;
+                // Use image height if available, otherwise default to -300px
+                const hiddenBottom = imageHeight > 0 ? -imageHeight : -300;
 
                 if (scrollPercent <= 0.9) {
-                    bottom = -300; // Hand is hidden
+                    bottom = hiddenBottom; // Hand is hidden
                 } else if (scrollPercent >= 1.0) {
                     bottom = 20; // Hand is fully visible
                 } else {
-                    const factor = (scrollPercent - 0.9) / 0.1; // Scale from 0 to 1 between 90% and 100%
-                    bottom = -300 + factor * 320; // Move from -300px to 20px
+                    // Interpolate between hiddenBottom and 20px from 90% to 100% scroll
+                    const factor = (scrollPercent - 0.9) / 0.1;
+                    bottom = hiddenBottom + factor * (20 - hiddenBottom);
                 }
                 backToTop.style.bottom = bottom + 'px';
             } else {
-                backToTop.style.bottom = '-300px'; // Hide if not scrollable
+                // Hide the hand if the page isn’t scrollable
+                backToTop.style.bottom = (imageHeight > 0 ? -imageHeight : -300) + 'px';
             }
         }
 
-        // Add scroll event listener
+        // Attach the scroll event listener
         window.addEventListener('scroll', updateBackToTop);
 
         // Set initial position on page load
