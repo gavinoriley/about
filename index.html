@@ -103,10 +103,6 @@
             transition: bottom 0.3s ease;
             z-index: 1000;
         }
-
-        .back-to-top.visible {
-            bottom: 20px;
-        }
     </style>
 </head>
 <body>
@@ -148,20 +144,39 @@
     </a>
     <script>
         const backToTop = document.querySelector('.back-to-top');
-        window.addEventListener('scroll', () => {
+
+        // Function to update the hand's position based on scroll
+        function updateBackToTop() {
             const scrollHeight = document.documentElement.scrollHeight;
             const clientHeight = document.documentElement.clientHeight;
             const scrollTop = window.scrollY;
             const maxScroll = scrollHeight - clientHeight;
-            const scrollPercent = scrollTop / maxScroll;
 
-            if (scrollPercent > 0.8) {
-                backToTop.classList.add('visible');
+            if (maxScroll > 0) { // Ensure the page is scrollable
+                const scrollPercent = scrollTop / maxScroll;
+                let bottom;
+
+                if (scrollPercent <= 0.9) {
+                    bottom = -300; // Hand is hidden
+                } else if (scrollPercent >= 1.0) {
+                    bottom = 20; // Hand is fully visible
+                } else {
+                    const factor = (scrollPercent - 0.9) / 0.1; // Scale from 0 to 1 between 90% and 100%
+                    bottom = -300 + factor * 320; // Move from -300px to 20px
+                }
+                backToTop.style.bottom = bottom + 'px';
             } else {
-                backToTop.classList.remove('visible');
+                backToTop.style.bottom = '-300px'; // Hide if not scrollable
             }
-        });
+        }
 
+        // Add scroll event listener
+        window.addEventListener('scroll', updateBackToTop);
+
+        // Set initial position on page load
+        updateBackToTop();
+
+        // Smooth scroll to top on click
         backToTop.addEventListener('click', (e) => {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
