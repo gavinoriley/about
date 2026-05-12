@@ -6,7 +6,7 @@
     <title>Game info - Hamachi the Psychotic Killer</title>
     <meta name="description" content="Discover HAMACHI THE PSYCHOTIC KILLER: The platformer game where you can play as the BAD GUY.">
     <meta name="keywords" content="Hamachi the Psychotic Killer, indie game, platformer, action game, 2d game, story, gameplay, demon queen, tofu character">
-   
+  
     <!-- Open Graph tags (Facebook, Instagram, Discord, etc. previews) -->
     <meta property="og:title" content="About - Hamachi the Psychotic Killer">
     <meta property="og:description" content="Discover HAMACHI THE PSYCHOTIC KILLER: The platformer game where you can play as the BAD GUY.">
@@ -16,20 +16,18 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Hamachi the Psychotic Killer">
     <meta property="og:locale" content="en_US">
-
     <!-- Twitter / X Card (appears when the link is shared on X/Twitter - uses the same logo for consistency) -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Game info - Hamachi the Psychotic Killer">
     <meta name="twitter:description" content="Discover HAMACHI THE PSYCHOTIC KILLER: The platformer game where you can play as the BAD GUY.">
     <meta name="twitter:image" content="https://gavinoriley.github.io/assets/2HamachiTitleLogo.png">
     <meta name="twitter:site" content="@imgavinoriley">
-
     <!-- Robots & Canonical (helps search engines index this page correctly) -->
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://hamachithepsychotickiller.com/about/">
     <link rel="icon" type="image/x-icon" href="/assets/hamafavi.ico">
     <link rel="preload" href="/assets/FSEX300.woff2" as="font" type="font/woff2" crossorigin>
-   
+  
     <!-- Preconnect hint for faster loading of external links (Steam store) -->
     <link rel="preconnect" href="https://store.steampowered.com">
     <style>
@@ -58,20 +56,21 @@
             align-items: center;
         }
 
-        /* === NEW SLEEK GLASSMORPHISM NAVBAR === */
+        /* === EXACT GLASS AESTHETIC FROM HOMEPAGE === */
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(10, 10, 50, 0.78);
-            backdrop-filter: blur(12px);
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
             padding: 9px 0;
             display: flex;
             justify-content: center;
             gap: 48px;
             z-index: 100;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
         }
 
         .navbar a {
@@ -87,7 +86,6 @@
             color: #cccccc;
         }
 
-        /* Buy Game Link */
         .navbar a.buy-game-link {
             color: #ffdd88;
         }
@@ -201,7 +199,6 @@
             }
         }
     </style>
-
     <!-- JSON-LD structured data -->
     <script type="application/ld+json">
     {
@@ -243,7 +240,7 @@
             <img src="https://gavinoriley.github.io/assets/titleprev.png" alt="Controls">
         </div>
         <p>The platformer game where you can play as the BAD GUY. (or the good guy)</p>
-        
+       
         <div class="image-container">
             <img src="https://gavinoriley.github.io/assets/update0normal.png" alt="Normal Scene">
             <img src="https://gavinoriley.github.io/assets/endscreengame.png" alt="End Screen Game">
@@ -252,27 +249,27 @@
 Venture through a world where your actions have consequences.<br>
 In this platformer, you control a piece of tofu named Hamachi, who unexpectedly falls into the clutches of Demon Queen Deity, an evil fiend who intends to use him as a vessel to conquer the world through mass murder.
 </p>
-        
+       
         <div class="image-container">
             <img src="https://gavinoriley.github.io/assets/1normal.png" alt="1 Normal Scene">
             <img src="https://gavinoriley.github.io/assets/chainsaw.png" alt="Chainsaw Scene">
         </div>
         <p>Spare or kill innocent civilians with your axe, or with a chainsaw that grants invincibility!</p>
-    
+   
         <!-- Demon Boss images -->
         <div class="image-container">
             <img src="https://gavinoriley.github.io/assets/demonboss1.png" alt="Demon Boss 1">
             <img src="https://gavinoriley.github.io/assets/demonboss2.png" alt="Demon Boss 2">
         </div>
-    
+   
         <p>Fight against powerful demons, or show them you mean now harm and pacify them!</p>
-    
+   
         <!-- Police chase images -->
         <div class="image-container">
             <img src="https://gavinoriley.github.io/assets/policechase1.png" alt="Police Chase 1">
             <img src="https://gavinoriley.github.io/assets/policechase2.png" alt="Police Chase 2">
         </div>
-    
+   
         <p>Your crimes will not go unnoticed by the authorities.</p>
     </div>
 
@@ -289,7 +286,6 @@ In this platformer, you control a piece of tofu named Hamachi, who unexpectedly 
         const backToTop = document.querySelector('.back-to-top');
         const backToTopImg = backToTop.querySelector('img');
         let imageHeight = 0;
-
         if (backToTopImg.complete) {
             imageHeight = backToTopImg.clientHeight;
         } else {
@@ -298,7 +294,6 @@ In this platformer, you control a piece of tofu named Hamachi, who unexpectedly 
                 updateBackToTop();
             });
         }
-
         function updateBackToTop() {
             const scrollHeight = document.documentElement.scrollHeight;
             const clientHeight = window.innerHeight;
@@ -321,19 +316,15 @@ In this platformer, you control a piece of tofu named Hamachi, who unexpectedly 
                 backToTop.style.bottom = (imageHeight > 0 ? -imageHeight : -300) + 'px';
             }
         }
-
         window.addEventListener('scroll', updateBackToTop);
         updateBackToTop();
-
         backToTop.addEventListener('click', (e) => {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-
         const clickableImages = document.querySelectorAll('.image-container img');
         const modal = document.querySelector('.image-modal');
         const modalImg = modal.querySelector('img');
-
         clickableImages.forEach(img => {
             img.addEventListener('click', () => {
                 modalImg.src = img.src;
@@ -342,12 +333,10 @@ In this platformer, you control a piece of tofu named Hamachi, who unexpectedly 
                 document.body.style.overflow = 'hidden';
             });
         });
-
         modal.addEventListener('click', () => {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
         });
-
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modal.style.display === 'flex') {
                 modal.style.display = 'none';
