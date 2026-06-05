@@ -98,13 +98,37 @@
         .navbar a.buy-game-link:hover {
             color: #e6b55c;
         }
-        /* DEV ROOM red styling */
+
+        /* DEV ROOM - Dramatic Demonic Fel Green Pulsing Aura */
         .navbar a.dev-room-link {
-            color: #ff4444;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+            animation: fel-glow-pulse 1.8s ease-in-out infinite;
         }
+
         .navbar a.dev-room-link:hover {
-            color: #ff6666;
+            color: #ccffcc;
         }
+
+        @keyframes fel-glow-pulse {
+            0%, 100% {
+                text-shadow:
+                    0 0 8px #39ff14,
+                    0 0 18px #39ff14,
+                    0 0 35px #00ff7f;
+            }
+            50% {
+                text-shadow:
+                    0 0 20px #39ff14,
+                    0 0 40px #39ff14,
+                    0 0 70px #00ff7f,
+                    0 0 100px #00ff41,
+                    0 0 130px #39ff14,
+                    0 0 160px #00ff7f;
+            }
+        }
+
         .logo {
             margin-top: 90px;
             text-align: center;
@@ -248,7 +272,7 @@
             <img src="https://gavinoriley.github.io/assets/titleprev.png" alt="Controls">
         </div>
         <p>The platformer game where you can play as the BAD GUY. (or the good guy)</p>
-     
+    
         <div class="image-container">
             <img src="https://gavinoriley.github.io/assets/update0normal.png" alt="Normal Scene">
             <img src="https://gavinoriley.github.io/assets/endscreengame.png" alt="End Screen Game">
@@ -257,27 +281,23 @@
 Venture through a world where your actions have consequences.<br>
 In this platformer, you control a piece of tofu named Hamachi, who unexpectedly falls into the clutches of Demon Queen Deity, an evil fiend who intends to use him as a vessel to conquer the world through mass murder.
 </p>
-     
+    
         <div class="image-container">
             <img src="https://gavinoriley.github.io/assets/1normal.png" alt="1 Normal Scene">
             <img src="https://gavinoriley.github.io/assets/chainsaw.png" alt="Chainsaw Scene">
         </div>
         <p>Spare or kill innocent civilians with your axe, or with a chainsaw that grants invincibility!</p>
- 
         <!-- Demon Boss images -->
         <div class="image-container">
             <img src="https://gavinoriley.github.io/assets/demonboss1.png" alt="Demon Boss 1">
             <img src="https://gavinoriley.github.io/assets/demonboss2.png" alt="Demon Boss 2">
         </div>
- 
         <p>Fight against powerful demons, or show them you mean now harm and pacify them!</p>
- 
         <!-- Police chase images -->
         <div class="image-container">
             <img src="https://gavinoriley.github.io/assets/policechase1.png" alt="Police Chase 1">
             <img src="https://gavinoriley.github.io/assets/policechase2.png" alt="Police Chase 2">
         </div>
- 
         <p>Your crimes will not go unnoticed by the authorities.</p>
     </div>
     <div class="image-modal">
