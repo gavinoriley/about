@@ -144,18 +144,13 @@
 
         /* Social Media Dock */
         .hero-socials {
-            position: fixed;
-            top: 30px; 
+            position: absolute;
+            top: 40px; 
             right: 40px; 
             display: flex;
             gap: 20px;
             z-index: 110;
             align-items: center;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(3px);
-            padding: 8px 16px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
         .hero-socials a {
             display: flex;
@@ -196,7 +191,7 @@
 
         /* Content Layout */
         .logo {
-            margin-top: 110px;
+            margin-top: 90px;
             text-align: center;
         }
         .logo img {
@@ -207,7 +202,7 @@
         .content {
             max-width: none;
             padding: 20px;
-            padding-top: 60px;
+            padding-top: 100px;
             text-align: center;
         }
         .image-container {
@@ -231,15 +226,9 @@
             line-height: 1.5;
             color: white;
             text-shadow: 1px 1px 2px black;
-            max-width: 2000px; /* Restored original global width so rest of site text looks normal */
+            max-width: 2000px;
             margin: 0 auto 20px auto;
         }
-        
-        /* Targeted fix class for the storyline text container */
-        .story-text {
-            max-width: 1150px; 
-        }
-
         .back-to-top {
             position: fixed;
             bottom: -300px;
@@ -283,16 +272,15 @@
                 font-size: 26px;
             }
             .hero-socials {
-                top: 22px;
-                right: 20px;
-                gap: 12px;
-                padding: 6px 10px;
+                top: 30px;
+                right: 30px;
+                gap: 16px;
             }
             .hero-socials img {
-                height: 24px; 
+                height: 26px; 
             }
             .logo {
-                margin-top: 90px;
+                margin-top: 60px;
             }
             .logo img {
                 max-width: 100%;
@@ -300,7 +288,7 @@
             .content {
                 max-width: 100%;
                 padding: 10px;
-                padding-top: 40px;
+                padding-top: 80px;
             }
             .image-container {
                 flex-direction: column;
@@ -310,9 +298,6 @@
             }
             p {
                 font-size: 18px;
-                max-width: 100%;
-            }
-            .story-text {
                 max-width: 100%;
             }
             .back-to-top {
@@ -387,7 +372,7 @@
             <img src="https://gavinoriley.github.io/assets/update0normal.png" alt="Normal Scene">
             <img src="https://gavinoriley.github.io/assets/endscreengame.png" alt="End Screen Game">
         </div>
-        <p class="story-text">
+        <p>
             Venture through a world where your actions have consequences.<br>
             In this platformer, you control a piece of tofu named Hamachi, who unexpectedly falls into the clutches of Demon Queen Deity, an evil fiend who intends to use him as a vessel to conquer the world through mass murder.
         </p>
@@ -421,6 +406,7 @@
 
     <script src="https://unpkg.com/lenis@1.3.23/dist/lenis.min.js"></script>
     <script>
+        // Initialize Lenis with smooth inertial layout settings
         const lenis = new Lenis({
             lerp: 0.08,
             wheelMultiplier: 1.0,
@@ -434,6 +420,7 @@
             stopInertiaOnNavigate: true
         });
 
+        // Navigation Toggle Logic
         const menuToggle = document.querySelector('.menu-toggle');
         const navOverlay = document.querySelector('.nav-overlay');
         const menuLinks = document.querySelectorAll('.menu-link');
@@ -453,6 +440,7 @@
             });
         });
 
+        // Back-to-top layout sync with Lenis scrolling engine
         const backToTop = document.querySelector('.back-to-top');
         const backToTopImg = backToTop.querySelector('img');
         let imageHeight = 0;
@@ -497,6 +485,7 @@
             lenis.scrollTo(0, { duration: 1.2 });
         });
 
+        // Clickable image view configurations
         const clickableImages = document.querySelectorAll('.image-container img');
         const modal = document.querySelector('.image-modal');
         const modalImg = modal.querySelector('img');
