@@ -6,30 +6,29 @@
     <title>Game info - Hamachi the Psychotic Killer</title>
     <meta name="description" content="Discover HAMACHI THE PSYCHOTIC KILLER: The platformer game where you can play as the BAD GUY.">
     <meta name="keywords" content="Hamachi the Psychotic Killer, indie game, platformer, action game, 2d game, story, gameplay, demon queen, tofu character">
-    <!-- Open Graph tags (Facebook, Instagram, Discord, etc. previews) -->
+    
     <meta property="og:title" content="About - Hamachi the Psychotic Killer">
     <meta property="og:description" content="Discover HAMACHI THE PSYCHOTIC KILLER: The platformer game where you can play as the BAD GUY.">
     <meta property="og:image" content="https://gavinoriley.github.io/assets/2HamachiTitleLogo.png">
     <meta property="og:url" content="https://hamachithepsychotickiller.com/about/">
-    <!-- Extra Open Graph tags -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Hamachi the Psychotic Killer">
     <meta property="og:locale" content="en_US">
-    <!-- Twitter / X Card (appears when the link is shared on X/Twitter - uses the same logo for consistency) -->
+    
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Game info - Hamachi the Psychotic Killer">
     <meta name="twitter:description" content="Discover HAMACHI THE PSYCHOTIC KILLER: The platformer game where you can play as the BAD GUY.">
     <meta name="twitter:image" content="https://gavinoriley.github.io/assets/2HamachiTitleLogo.png">
     <meta name="twitter:site" content="@imgavinoriley">
-    <!-- Robots & Canonical (helps search engines index this page correctly) -->
+    
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://hamachithepsychotickiller.com/about/">
     <link rel="icon" type="image/x-icon" href="/assets/hamafavi.ico">
     <link rel="preload" href="/assets/FSEX300.woff2" as="font" type="font/woff2" crossorigin>
-    <!-- Preconnect hint for faster loading of external links (Steam store) -->
+    
     <link rel="preconnect" href="https://store.steampowered.com">
-    <!-- Lenis Smooth Scroll CSS -->
     <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.23/dist/lenis.css">
+    
     <style>
         @font-face {
             font-family: 'FSEX300';
@@ -54,7 +53,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-x: hidden;
         }
+        
         /* Lenis Recommended Styles */
         html.lenis {
             height: auto;
@@ -65,49 +66,111 @@
         .lenis.lenis-stopped {
             overflow: hidden;
         }
-        /* === EXACT GLASS AESTHETIC FROM HOMEPAGE === */
-        .navbar {
+
+        /* Hamburger Menu Button */
+        .menu-toggle {
+            position: fixed;
+            top: 40px; 
+            left: 60px; 
+            width: 28px;
+            height: 18px;
+            background: none;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center; 
+            z-index: 200;
+        }
+        .menu-toggle span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: #fff;
+            border-radius: 1px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.9);
+        }
+        .menu-toggle span:nth-child(2) {
+            width: 70%;
+        }
+        .menu-toggle.open span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.open span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* Fullscreen Navigation Overlay */
+        .nav-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(5px);
-            padding: 9px 0;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 150;
             display: flex;
+            flex-direction: column;
             justify-content: center;
-            gap: 48px;
-            z-index: 100;
-            border-bottom: none;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+            align-items: center;
+            gap: 24px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
         }
-        .navbar a {
+        .nav-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .nav-overlay a {
             color: #fff;
             text-decoration: none;
-            font-size: 24px;
-            padding: 6px 14px;
-            border-radius: 4px;
-            transition: color 0.3s ease;
+            font-size: 36px;
+            letter-spacing: 2px;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
-        .navbar a:hover {
-            color: #cccccc;
+        .nav-overlay a:hover {
+            color: #ff4444;
+            transform: scale(1.05);
         }
-        .navbar a.buy-game-link {
-            color: #ffdd88;
-        }
-        .navbar a.buy-game-link:hover {
-            color: #e6b55c;
-        }
-        /* DEV ROOM - Demonic Deep Blood Red Pulsing Aura */
-        .navbar a.dev-room-link {
-            color: #fff;
-            position: relative;
-            z-index: 1;
+        .nav-overlay a.dev-room-link {
             animation: demonic-glow-pulse 1.8s ease-in-out infinite;
         }
-        .navbar a.dev-room-link:hover {
-            color: #ffcccc;
+
+        /* Social Media Dock */
+        .hero-socials {
+            position: absolute;
+            top: 40px; 
+            right: 40px; 
+            display: flex;
+            gap: 20px;
+            z-index: 110;
+            align-items: center;
         }
+        .hero-socials a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        .hero-socials img {
+            height: 32px; 
+            width: auto;
+            display: block;
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
+            will-change: opacity; 
+            transform: translateZ(0); 
+        }
+        .hero-socials a:hover img {
+            opacity: 0.5;
+        }
+
+        /* Demonic Pulse Glow Animation */
         @keyframes demonic-glow-pulse {
             0%, 100% {
                 text-shadow:
@@ -125,6 +188,8 @@
                     0 0 160px #ff0000;
             }
         }
+
+        /* Content Layout */
         .logo {
             margin-top: 90px;
             text-align: center;
@@ -188,20 +253,31 @@
             max-height: 90%;
             object-fit: contain;
         }
+
+        /* Responsive Design Rules */
         @media screen and (max-width: 768px) {
-            .navbar {
-                justify-content: center;
-                gap: 20px;
-                flex-wrap: wrap;
-                max-width: 100%;
-                overflow-x: auto;
-                padding: 8px 0;
+            .menu-toggle {
+                top: 30px; 
+                left: 30px; 
+                width: 24px;
+                height: 16px;
             }
-            .navbar a {
-                font-size: 16px;
+            .menu-toggle span {
+                height: 2px;
             }
-            .navbar a.play-game-link {
-                display: none;
+            .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+            .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+            .nav-overlay a {
+                font-size: 26px;
+            }
+            .hero-socials {
+                top: 30px;
+                right: 30px;
+                gap: 16px;
+            }
+            .hero-socials img {
+                height: 26px; 
             }
             .logo {
                 margin-top: 60px;
@@ -229,7 +305,7 @@
             }
         }
     </style>
-    <!-- JSON-LD structured data -->
+    
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -254,15 +330,38 @@
     </script>
 </head>
 <body>
-    <nav class="navbar">
-        <a href="https://hamachithepsychotickiller.com">HOME</a>
-        <a href="https://store.steampowered.com/app/3355690/Hamachi_the_Psychotic_Killer/" target="_blank" class="buy-game-link">BUY GAME</a>
-        <a href="https://itch.io/embed-upload/16876356?color=333333" target="_blank" class="play-game-link">PLAY ONLINE DEMO</a>
-        <a href="https://hamachithepsychotickiller.com/devroom/" class="dev-room-link">DEV ROOM</a>
+
+    <button class="menu-toggle" aria-label="Toggle Navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav class="nav-overlay">
+        <a href="https://hamachithepsychotickiller.com/about/" class="menu-link">GAME INFO</a>
+        <a href="https://store.steampowered.com/app/3355690/Hamachi_the_Psychotic_Killer/" target="_blank" class="menu-link">BUY GAME</a>
+        <a href="https://itch.io/embed-upload/16876356?color=333333" target="_blank" class="menu-link">PLAY ONLINE DEMO</a>
+        <a href="https://hamachithepsychotickiller.com/devroom/" class="dev-room-link menu-link">DEV ROOM</a>
+        <a href="mailto:img.oriley@gmail.com?subject=Contact%20from%20Hamachi%20the%20Psychotic%20Killer%20page" class="menu-link">CONTACT</a>
+        <a href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3355690/manuals/cbeecc8fd965c68b6d64b82a593dafd5da4b0412/2hamachi-the-psychotic-killer-manual.pdf?t=1746692821" target="_blank" class="menu-link" style="font-size: 20px; color: #888;">GAME MANUAL</a>
     </nav>
+
+    <div class="hero-socials">
+        <a href="https://x.com/imgavinoriley" target="_blank" rel="noopener noreferrer" aria-label="Follow Gavin O'Riley on X">
+            <img src="https://gavinoriley.github.io/assets/whitex.png" alt="X Icon">
+        </a>
+        <a href="https://www.youtube.com/@hamachithepsychotickiller" target="_blank" rel="noopener noreferrer" aria-label="Hamachi the Psychotic Killer YouTube Channel">
+            <img src="https://gavinoriley.github.io/assets/whiteyoutube.png" alt="YouTube Icon">
+        </a>
+        <a href="https://www.tiktok.com/@hamachithepsychokiller" target="_blank" rel="noopener noreferrer" aria-label="Hamachi the Psychotic Killer TikTok Profile">
+            <img src="https://gavinoriley.github.io/assets/whitetiktok.png" alt="TikTok Icon">
+        </a>
+    </div>
+
     <div class="logo">
         <img src="https://gavinoriley.github.io/assets/Z4ow1Dt.png" alt="Hamachi Logo">
     </div>
+    
     <div class="content">
         <div class="image-container">
             <img src="https://gavinoriley.github.io/assets/titleprev.png" alt="Controls">
@@ -274,38 +373,40 @@
             <img src="https://gavinoriley.github.io/assets/endscreengame.png" alt="End Screen Game">
         </div>
         <p>
-Venture through a world where your actions have consequences.<br>
-In this platformer, you control a piece of tofu named Hamachi, who unexpectedly falls into the clutches of Demon Queen Deity, an evil fiend who intends to use him as a vessel to conquer the world through mass murder.
-</p>
+            Venture through a world where your actions have consequences.<br>
+            In this platformer, you control a piece of tofu named Hamachi, who unexpectedly falls into the clutches of Demon Queen Deity, an evil fiend who intends to use him as a vessel to conquer the world through mass murder.
+        </p>
    
         <div class="image-container">
             <img src="https://gavinoriley.github.io/assets/1normal.png" alt="1 Normal Scene">
             <img src="https://gavinoriley.github.io/assets/chainsaw.png" alt="Chainsaw Scene">
         </div>
         <p>Spare or kill innocent civilians with your axe, or with a chainsaw that grants invincibility!</p>
-        <!-- Demon Boss images -->
+        
         <div class="image-container">
             <img src="https://gavinoriley.github.io/assets/demonboss1.png" alt="Demon Boss 1">
             <img src="https://gavinoriley.github.io/assets/demonboss2.png" alt="Demon Boss 2">
         </div>
         <p>Fight against powerful demons, or show them you mean now harm and pacify them!</p>
-        <!-- Police chase images -->
+        
         <div class="image-container">
             <img src="https://gavinoriley.github.io/assets/policechase1.png" alt="Police Chase 1">
             <img src="https://gavinoriley.github.io/assets/policechase2.png" alt="Police Chase 2">
         </div>
         <p>Your crimes will not go unnoticed by the authorities.</p>
     </div>
+
     <div class="image-modal">
         <img src="" alt="">
     </div>
+    
     <a href="#" class="back-to-top">
         <img src="https://gavinoriley.github.io/assets/sprnose.png" alt="Back to Top">
     </a>
-    <!-- Lenis Smooth Scroll Script -->
+
     <script src="https://unpkg.com/lenis@1.3.23/dist/lenis.min.js"></script>
     <script>
-        // Initialize Lenis with the same high-end inertial settings as the homepage
+        // Initialize Lenis with smooth inertial layout settings
         const lenis = new Lenis({
             lerp: 0.08,
             wheelMultiplier: 1.0,
@@ -318,10 +419,32 @@ In this platformer, you control a piece of tofu named Hamachi, who unexpectedly 
             allowNestedScroll: true,
             stopInertiaOnNavigate: true
         });
-        // Re-attach existing scroll listeners to work with Lenis
+
+        // Navigation Toggle Logic
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navOverlay = document.querySelector('.nav-overlay');
+        const menuLinks = document.querySelectorAll('.menu-link');
+
+        function toggleMenu() {
+            menuToggle.classList.toggle('open');
+            navOverlay.classList.toggle('open');
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navOverlay.classList.contains('open')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // Back-to-top layout sync with Lenis scrolling engine
         const backToTop = document.querySelector('.back-to-top');
         const backToTopImg = backToTop.querySelector('img');
         let imageHeight = 0;
+        
         if (backToTopImg.complete) {
             imageHeight = backToTopImg.clientHeight;
         } else {
@@ -330,8 +453,9 @@ In this platformer, you control a piece of tofu named Hamachi, who unexpectedly 
                 updateBackToTop();
             });
         }
+
         function updateBackToTop() {
-            const scrollTop = lenis.scroll; // Use Lenis scroll value
+            const scrollTop = lenis.scroll;
             const scrollHeight = document.documentElement.scrollHeight;
             const clientHeight = window.innerHeight;
             const maxScroll = scrollHeight - clientHeight;
@@ -352,17 +476,20 @@ In this platformer, you control a piece of tofu named Hamachi, who unexpectedly 
                 backToTop.style.bottom = (imageHeight > 0 ? -imageHeight : -300) + 'px';
             }
         }
-        // Use Lenis scroll event instead of native scroll
+
         lenis.on('scroll', updateBackToTop);
         updateBackToTop();
+        
         backToTop.addEventListener('click', (e) => {
             e.preventDefault();
-            lenis.scrollTo(0, { duration: 1.2 }); // Smooth scroll to top with Lenis
+            lenis.scrollTo(0, { duration: 1.2 });
         });
-        // Image modal functionality (unchanged)
+
+        // Clickable image view configurations
         const clickableImages = document.querySelectorAll('.image-container img');
         const modal = document.querySelector('.image-modal');
         const modalImg = modal.querySelector('img');
+        
         clickableImages.forEach(img => {
             img.addEventListener('click', () => {
                 modalImg.src = img.src;
@@ -371,17 +498,20 @@ In this platformer, you control a piece of tofu named Hamachi, who unexpectedly 
                 document.body.style.overflow = 'hidden';
             });
         });
+        
         modal.addEventListener('click', () => {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
         });
+        
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modal.style.display === 'flex') {
                 modal.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
         });
-        console.log('%c✅ Lenis inertial smooth scroll initialized on About page', 'color: #ffdd88; font-family: monospace;');
+
+        console.log('%c Lenis inertial smooth scroll initialized on About page', 'color: #ffdd88; font-family: monospace;');
     </script>
 </body>
 </html>
