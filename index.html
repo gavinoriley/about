@@ -142,15 +142,20 @@
             animation: demonic-glow-pulse 1.8s ease-in-out infinite;
         }
 
-        /* Social Media Dock */
+        /* Social Media Dock - Updated to Fixed Position */
         .hero-socials {
-            position: absolute;
-            top: 40px; 
+            position: fixed;
+            top: 30px; 
             right: 40px; 
             display: flex;
             gap: 20px;
             z-index: 110;
             align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
+            padding: 8px 16px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
         .hero-socials a {
             display: flex;
@@ -191,7 +196,7 @@
 
         /* Content Layout */
         .logo {
-            margin-top: 90px;
+            margin-top: 110px;
             text-align: center;
         }
         .logo img {
@@ -202,7 +207,7 @@
         .content {
             max-width: none;
             padding: 20px;
-            padding-top: 100px;
+            padding-top: 60px;
             text-align: center;
         }
         .image-container {
@@ -226,7 +231,7 @@
             line-height: 1.5;
             color: white;
             text-shadow: 1px 1px 2px black;
-            max-width: 2000px;
+            max-width: 800px; /* Constrained width fixes the widescreen stretch bug */
             margin: 0 auto 20px auto;
         }
         .back-to-top {
@@ -272,15 +277,16 @@
                 font-size: 26px;
             }
             .hero-socials {
-                top: 30px;
-                right: 30px;
-                gap: 16px;
+                top: 22px;
+                right: 20px;
+                gap: 12px;
+                padding: 6px 10px;
             }
             .hero-socials img {
-                height: 26px; 
+                height: 24px; 
             }
             .logo {
-                margin-top: 60px;
+                margin-top: 90px;
             }
             .logo img {
                 max-width: 100%;
@@ -288,7 +294,7 @@
             .content {
                 max-width: 100%;
                 padding: 10px;
-                padding-top: 80px;
+                padding-top: 40px;
             }
             .image-container {
                 flex-direction: column;
@@ -406,7 +412,6 @@
 
     <script src="https://unpkg.com/lenis@1.3.23/dist/lenis.min.js"></script>
     <script>
-        // Initialize Lenis with smooth inertial layout settings
         const lenis = new Lenis({
             lerp: 0.08,
             wheelMultiplier: 1.0,
@@ -420,7 +425,6 @@
             stopInertiaOnNavigate: true
         });
 
-        // Navigation Toggle Logic
         const menuToggle = document.querySelector('.menu-toggle');
         const navOverlay = document.querySelector('.nav-overlay');
         const menuLinks = document.querySelectorAll('.menu-link');
@@ -440,7 +444,6 @@
             });
         });
 
-        // Back-to-top layout sync with Lenis scrolling engine
         const backToTop = document.querySelector('.back-to-top');
         const backToTopImg = backToTop.querySelector('img');
         let imageHeight = 0;
@@ -485,7 +488,6 @@
             lenis.scrollTo(0, { duration: 1.2 });
         });
 
-        // Clickable image view configurations
         const clickableImages = document.querySelectorAll('.image-container img');
         const modal = document.querySelector('.image-modal');
         const modalImg = modal.querySelector('img');
