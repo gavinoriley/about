@@ -142,7 +142,7 @@
             animation: demonic-glow-pulse 1.8s ease-in-out infinite;
         }
 
-        /* Social Media Dock - Updated to Fixed Position */
+        /* Social Media Dock */
         .hero-socials {
             position: fixed;
             top: 30px; 
@@ -231,9 +231,15 @@
             line-height: 1.5;
             color: white;
             text-shadow: 1px 1px 2px black;
-            max-width: 800px; /* Constrained width fixes the widescreen stretch bug */
+            max-width: 2000px; /* Restored original global width so rest of site text looks normal */
             margin: 0 auto 20px auto;
         }
+        
+        /* Targeted fix class for the storyline text container */
+        .story-text {
+            max-width: 1150px; 
+        }
+
         .back-to-top {
             position: fixed;
             bottom: -300px;
@@ -304,6 +310,9 @@
             }
             p {
                 font-size: 18px;
+                max-width: 100%;
+            }
+            .story-text {
                 max-width: 100%;
             }
             .back-to-top {
@@ -378,7 +387,7 @@
             <img src="https://gavinoriley.github.io/assets/update0normal.png" alt="Normal Scene">
             <img src="https://gavinoriley.github.io/assets/endscreengame.png" alt="End Screen Game">
         </div>
-        <p>
+        <p class="story-text">
             Venture through a world where your actions have consequences.<br>
             In this platformer, you control a piece of tofu named Hamachi, who unexpectedly falls into the clutches of Demon Queen Deity, an evil fiend who intends to use him as a vessel to conquer the world through mass murder.
         </p>
