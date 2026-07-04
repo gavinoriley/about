@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hamachi the Psychotic Killer</title>
     
-    <!-- Unified Global SEO, Open Graph & Twitter Discovery Meta Engines -->
     <meta name="description" content="HAMACHI THE PSYCHOTIC KILLER: The platformer game where you can play as the BAD GUY.">
     <meta name="keywords" content="Hamachi the Psychotic Killer, video game, indie game, action game, 2d game, platformer">
     <meta property="og:title" content="Hamachi the Psychotic Killer">
@@ -79,7 +78,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            align-items: center; 
+            align-items: center;
             z-index: 200;
         }
         .menu-toggle span {
@@ -245,7 +244,7 @@
 
         /* Social Media Dock - UPDATED TO FIXED FOR FLUID TRACKING */
         .hero-socials {
-            position: fixed; 
+            position: fixed;
             top: 40px; 
             right: 40px; 
             display: flex;
@@ -259,13 +258,13 @@
             text-decoration: none;
         }
         .hero-socials img {
-            height: 32px; 
+            height: 32px;
             width: auto;
             display: block;
             opacity: 1;
             transition: opacity 0.3s ease-in-out;
             will-change: opacity; 
-            transform: translateZ(0); 
+            transform: translateZ(0);
         }
         .hero-socials a:hover img {
             opacity: 0.5;
@@ -438,7 +437,7 @@
         /* Responsive Design Rules */
         @media screen and (max-width: 768px) {
             .menu-toggle {
-                top: 30px; 
+                top: 30px;
                 left: 30px; 
                 width: 24px;
                 height: 16px;
@@ -479,7 +478,7 @@
                 gap: 16px;
             }
             .hero-socials img {
-                height: 26px; 
+                height: 26px;
             }
             .share-trigger-btn svg { width: 26px; height: 26px; }
             .share-card { top: 38px; right: 0; }
@@ -508,10 +507,12 @@
             .back-to-top {
                 display: none;
             }
+            .desktop-only {
+                display: none !important;
+            }
         }
     </style>
     
-    <!-- Unified Structured Search Data Block -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -544,10 +545,9 @@
     </button>
 
     <nav class="nav-overlay" id="mainNavOverlay">
-        <!-- Re-indexed Sandwich Buttons synced with Homepage Structural Order -->
         <div class="nav-links-wrapper" id="menuLinksWrapper">
             <a href="https://hamachithepsychotickiller.com" class="menu-link">HOME</a>
-            <a href="https://itch.io/embed-upload/16876356?color=333333" target="_blank" class="menu-link">PLAY ONLINE DEMO</a>
+            <a href="https://itch.io/embed-upload/16876356?color=333333" target="_blank" class="menu-link desktop-only">PLAY ONLINE DEMO</a>
             <a href="https://store.steampowered.com/app/3355690/Hamachi_the_Psychotic_Killer/" target="_blank" class="menu-link">BUY GAME</a>
             <a href="https://hamachithepsychotickiller.com/devroom/" class="dev-room-link menu-link">DEV ROOM</a>
             <a href="mailto:img.oriley@gmail.com?subject=Contact%20from%20Hamachi%20the%20Psychotic%20Killer%20page" class="menu-link">CONTACT</a>
@@ -558,6 +558,7 @@
         <div class="synopsis-container" id="synopsisContentPanel">
             <div class="synopsis-left">
                 <p class="synopsis-desc">In this platformer, you control a piece of tofu named Hamachi, who unexpectedly falls into the possession of Demon Queen Deity, an evil fiend who intends to use him as a vessel to conquer the world through mass murder.</p>
+            
                 <h3 class="synopsis-features-title">features:</h3>
                 <ul class="synopsis-features-list">
                     <li>Play as the villain: Choose to kill, spare, or ignore every civilian.</li>
@@ -581,7 +582,7 @@
     </nav>
 
     <div class="hero-socials">
-        <a href="https://x.com/imgavinoriley" target="_blank" rel="noopener noreferrer" aria-label="Follow gavinoriley on 𝕏">
+        <a href="https://x.com/imgavinoriley" target="_blank" rel="noopener noreferrer" aria-label="Follow gavinoriley on ">
             <img src="https://gavinoriley.github.io/assets/whitex.png" alt="X Icon">
         </a>
         <a href="https://www.youtube.com/@hamachithepsychotickiller" target="_blank" rel="noopener noreferrer" aria-label="Hamachi the Psychotic Killer YouTube Channel">
@@ -594,7 +595,6 @@
             <img src="https://gavinoriley.github.io/assets/whitehamaface.png" alt="Hama Icon">
         </a>
         
-        <!-- Dropdown Share Layout System Structure - Updated target URLs to /about/ -->
         <div class="share-wrapper">
             <button class="share-trigger-btn" id="shareEngineTrigger" aria-label="Open Share Options">
                 <svg viewBox="0 0 24 24">
@@ -756,10 +756,12 @@
             const scrollHeight = document.documentElement.scrollHeight;
             const clientHeight = window.innerHeight;
             const maxScroll = scrollHeight - clientHeight;
+
             if (maxScroll > 0) {
                 const scrollPercent = scrollTop / maxScroll;
                 const hiddenBottom = imageHeight > 0 ? -imageHeight : -300;
                 let bottom;
+
                 if (scrollPercent <= 0.9) {
                     bottom = hiddenBottom;
                 } else if (scrollPercent >= 1.0) {
@@ -776,7 +778,7 @@
 
         lenis.on('scroll', updateBackToTop);
         updateBackToTop();
-        
+
         backToTop.addEventListener('click', (e) => {
             e.preventDefault();
             lenis.scrollTo(0, { duration: 1.2 });
@@ -795,12 +797,12 @@
                 document.body.style.overflow = 'hidden';
             });
         });
-        
+
         modal.addEventListener('click', () => {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
         });
-        
+
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modal.style.display === 'flex') {
                 modal.style.display = 'none';
@@ -831,6 +833,7 @@
             const urlToCopy = 'https://hamachithepsychotickiller.com/about/';
             navigator.clipboard.writeText(urlToCopy).then(() => {
                 copyLinkTextNode.textContent = 'Copied!';
+                
                 copyLinkActionBtn.style.borderColor = '#00ff44';
                 copyLinkActionBtn.style.color = '#00ff44';
                 setTimeout(() => {
