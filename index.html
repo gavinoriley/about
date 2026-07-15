@@ -55,6 +55,12 @@
             overflow-x: hidden;
         }
         
+        /* FIXED: Bulletproof Scroll Lock Class (No height property to preserve scroll coordinates) */
+        .scroll-locked {
+            overflow: hidden !important;
+            touch-action: none;
+        }
+
         /* Background Video Styles */
         .background-video {
             position: fixed;
@@ -254,7 +260,7 @@
             flex-shrink: 0;
         }
 
-        /* Social Media Dock - UPDATED TO FIXED FOR FLUID TRACKING */
+        /* Social Media Dock */
         .hero-socials {
             position: fixed;
             top: 40px; 
@@ -292,7 +298,6 @@
             visibility: visible;
             transform: translateY(0);
         }
-        /* Maintain hover transparency state on X logo while user interacts with the card */
         .x-hover-wrapper:hover a img {
             opacity: 0.5;
         }
@@ -305,7 +310,6 @@
             font-size: 14px;
             justify-content: center;
         }
-        /* Invisible pseudo-bridge to keep hover open smoothly between button and dropdown */
         .hover-card::before {
             content: "";
             position: absolute;
@@ -423,6 +427,10 @@
             max-width: 500px;
             height: auto;
             background: transparent !important;
+            transition: transform 0.2s ease;
+        }
+        .logo a:hover img {
+            transform: scale(1.02);
         }
         .content {
             max-width: none;
@@ -445,6 +453,7 @@
             background: transparent !important;
             box-shadow: 0 0 10px #ff0000;
             cursor: pointer;
+            transition: opacity 0.2s ease, box-shadow 0.3s ease;
         }
         p {
             font-size: 22px;
@@ -461,22 +470,33 @@
             transition: bottom 0.3s ease;
             z-index: 1000;
         }
+
+        /* POLISHED SMOOTH ZOOM MODAL STYLES */
         .image-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0);
             display: none;
-            justify-content: center;
-            align-items: center;
             z-index: 1000;
+            transition: background-color 0.4s ease;
+            pointer-events: none;
+        }
+        .image-modal.active {
+            background-color: rgba(0, 0, 0, 0.85);
+            pointer-events: auto;
         }
         .image-modal img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
+            position: fixed;
+            transform-origin: center center;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: transform;
+            cursor: zoom-out;
+            box-shadow: 0 0 20px #ff0000;
+            max-width: none;
+            max-height: none;
         }
 
         /* Responsive Design Rules */
@@ -682,8 +702,11 @@
         </div>
     </div>
 
+    <!-- Wrapped Logo with the Homepage anchor tag -->
     <div class="logo">
-        <img src="https://gavinoriley.github.io/assets/Z4ow1Dt.png" alt="Hamachi Logo">
+        <a href="https://hamachithepsychotickiller.com/">
+            <img src="https://gavinoriley.github.io/assets/Z4ow1Dt.png" alt="Hamachi Logo">
+        </a>
     </div>
     
     <div class="content">
@@ -731,19 +754,24 @@
 
     <script src="https://unpkg.com/lenis@1.3.23/dist/lenis.min.js"></script>
     <script>
-        // Initialize Lenis with smooth inertial layout settings
+        // Initialize Lenis with standard setup
         const lenis = new Lenis({
             lerp: 0.08,
             wheelMultiplier: 1.0,
             touchMultiplier: 1.5,
             smoothWheel: true,
             smoothTouch: false,
-            autoRaf: true,
-            autoToggle: true,
             anchors: true,
             allowNestedScroll: true,
             stopInertiaOnNavigate: true
         });
+
+        // The absolute gold standard animation loop
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
 
         // Navigation Toggle & Synopsis Overlay Logic
         const menuToggle = document.querySelector('.menu-toggle');
@@ -760,13 +788,18 @@
             navOverlay.classList.toggle('open');
 
             if (isClosing) {
-                document.body.style.overflow = '';
+                // Instantly clean up all scrolling restrictions
+                document.documentElement.classList.remove('scroll-locked');
+                document.documentElement.classList.remove('lenis-stopped');
+                if (typeof lenis !== 'undefined') lenis.start();
+
                 setTimeout(() => {
                     menuLinksWrapper.classList.remove('hidden');
                     synopsisContentPanel.classList.remove('active');
                 }, 400);
             } else {
-                document.body.style.overflow = 'hidden';
+                document.documentElement.classList.add('scroll-locked');
+                if (typeof lenis !== 'undefined') lenis.stop();
             }
         }
 
@@ -845,29 +878,109 @@
             lenis.scrollTo(0, { duration: 1.2 });
         });
 
-        // Clickable image view configurations
+        // Clickable image view configurations with polished zoom effect
         const clickableImages = document.querySelectorAll('.image-container img');
         const modal = document.querySelector('.image-modal');
         const modalImg = modal.querySelector('img');
+        let activeOriginalImg = null;
+        let isTransitioning = false;
         
         clickableImages.forEach(img => {
             img.addEventListener('click', () => {
+                if (isTransitioning || modal.classList.contains('active')) return;
+                isTransitioning = true;
+                activeOriginalImg = img;
+
+                // Find location and dimension of target image
+                const rect = img.getBoundingClientRect();
+
                 modalImg.src = img.src;
                 modalImg.alt = img.alt;
-                modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
+                modalImg.style.top = `${rect.top}px`;
+                modalImg.style.left = `${rect.left}px`;
+                modalImg.style.width = `${rect.width}px`;
+                modalImg.style.height = `${rect.height}px`;
+
+                modalImg.style.transition = 'none';
+                modalImg.style.transform = 'translate(0, 0) scale(1)';
+
+                modal.style.display = 'block';
+                
+                // Force immediate layout reflow
+                modalImg.offsetHeight;
+
+                modal.classList.add('active');
+
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+
+                const maxW = viewportWidth * 0.9;
+                const maxH = viewportHeight * 0.9;
+
+                const imgRatio = rect.width / rect.height;
+                let targetWidth = maxW;
+                let targetHeight = maxW / imgRatio;
+
+                if (targetHeight > maxH) {
+                    targetHeight = maxH;
+                    targetWidth = maxH * imgRatio;
+                }
+
+                const scale = targetWidth / rect.width;
+
+                const rectCenterX = rect.left + rect.width / 2;
+                const rectCenterY = rect.top + rect.height / 2;
+                const viewportCenterX = viewportWidth / 2;
+                const viewportCenterY = viewportHeight / 2;
+
+                const translateX = viewportCenterX - rectCenterX;
+                const translateY = viewportCenterY - rectCenterY;
+
+                img.style.opacity = '0';
+
+                modalImg.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
+                modalImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+                // Apply custom scroll-locking class and pause Lenis completely
+                document.documentElement.classList.add('scroll-locked');
+                if (typeof lenis !== 'undefined') lenis.stop();
+
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 400);
             });
         });
 
-        modal.addEventListener('click', () => {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
+        function closeModal() {
+            if (isTransitioning || !activeOriginalImg) return;
+            isTransitioning = true;
+
+            // Instantly clear custom scroll locking classes & restart Lenis
+            document.documentElement.classList.remove('scroll-locked');
+            document.documentElement.classList.remove('lenis-stopped');
+            if (typeof lenis !== 'undefined') lenis.start();
+
+            // Animate transitions
+            modalImg.style.transform = 'translate(0, 0) scale(1)';
+            modal.classList.remove('active');
+
+            const originalImg = activeOriginalImg;
+
+            setTimeout(() => {
+                modal.style.display = 'none';
+                if (originalImg) {
+                    originalImg.style.opacity = '1';
+                }
+                activeOriginalImg = null;
+                isTransitioning = false;
+            }, 400);
+        }
+
+        modal.addEventListener('click', closeModal);
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.style.display === 'flex') {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
             }
         });
 
@@ -904,7 +1017,7 @@
             }).catch(err => console.error(err));
         });
 
-        console.log('%c Lenis inertial smooth scroll initialized on About page', 'color: #ffdd88; font-family: monospace;');
+        console.log('%c Lenis inertial smooth scroll fully updated with robust RAF loop.', 'color: #ffdd88; font-family: monospace;');
     </script>
 </body>
 </html>
