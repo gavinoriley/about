@@ -8,7 +8,7 @@
     <meta name="description" content="HAMACHI THE PSYCHOTIC KILLER: The platformer game where you can play as the BAD GUY.">
     <meta name="keywords" content="Hamachi the Psychotic Killer, video game, indie game, action game, 2d game, platformer">
     <meta property="og:title" content="Hamachi the Psychotic Killer">
-    <meta property="og:description" content="HAMACHI THE PSYYCHOTIC KILLER: The platformer game where you can play as the BAD GUY.">
+    <meta property="og:description" content="HAMACHI THE PSYCHOTIC KILLER: The platformer game where you can play as the BAD GUY.">
     <meta property="og:image" content="https://gavinoriley.github.io/assets/ScreenshotHomePage.png">
     <meta property="og:url" content="https://hamachithepsychotickiller.com">
     <meta property="og:type" content="website">
@@ -53,6 +53,18 @@
             flex-direction: column;
             align-items: center;
             overflow-x: hidden;
+        }
+        
+        /* Background Video Styles */
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+            pointer-events: none;
         }
         
         /* Lenis Recommended Styles */
@@ -570,6 +582,12 @@
     </script>
 </head>
 <body>
+
+    <!-- Fixed Video Background Element -->
+    <video autoplay loop muted playsinline class="background-video">
+        <source src="https://gavinoriley.github.io/assets/3dhellfire.mp4" type="video/mp4">
+        Your browser does not support HTML5 video background.
+    </video>
 
     <button class="menu-toggle" aria-label="Toggle Navigation">
         <span></span>
