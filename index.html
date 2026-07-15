@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hamachi the Psychotic Killer</title>
+    <title>About Hamachi the Psychotic Killer</title>
     
     <meta name="description" content="HAMACHI THE PSYCHOTIC KILLER: The platformer game where you can play as the BAD GUY.">
     <meta name="keywords" content="Hamachi the Psychotic Killer, video game, indie game, action game, 2d game, platformer">
@@ -268,6 +268,39 @@
         }
         .hero-socials a:hover img {
             opacity: 0.5;
+        }
+
+        /* Hover dropdown architecture for X link */
+        .x-hover-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .x-hover-wrapper:hover .hover-card {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        /* Maintain hover transparency state on X logo while user interacts with the card */
+        .x-hover-wrapper:hover a img {
+            opacity: 0.5;
+        }
+        .hover-card {
+            width: auto;
+            min-width: 220px;
+            white-space: nowrap;
+        }
+        .hover-card .share-opt-link {
+            font-size: 14px;
+            justify-content: center;
+        }
+        /* Invisible pseudo-bridge to keep hover open smoothly between button and dropdown */
+        .hover-card::before {
+            content: "";
+            position: absolute;
+            top: -15px;
+            left: 0;
+            right: 0;
+            height: 15px;
         }
 
         /* DROPDOWN SHARE ARCHITECTURE DECLARATIONS */
@@ -582,9 +615,18 @@
     </nav>
 
     <div class="hero-socials">
-        <a href="https://x.com/imgavinoriley" target="_blank" rel="noopener noreferrer" aria-label="Follow gavinoriley on ">
-            <img src="https://gavinoriley.github.io/assets/whitex.png" alt="X Icon">
-        </a>
+        <!-- Wrap the X Link to activate hover engine and house the matching dropdown card -->
+        <div class="x-hover-wrapper">
+            <a href="https://x.com/imgavinoriley" target="_blank" rel="noopener noreferrer" aria-label="Follow gavinoriley on X">
+                <img src="https://gavinoriley.github.io/assets/whitex.png" alt="X Icon">
+            </a>
+            <div class="share-card hover-card">
+                <a href="https://x.com/search?q=%23hamachithepsychotickiller&src=hashtag_click" target="_blank" rel="noopener noreferrer" class="share-opt-link">
+                    #hamachithepsychotickiller
+                </a>
+            </div>
+        </div>
+
         <a href="https://www.youtube.com/@hamachithepsychotickiller" target="_blank" rel="noopener noreferrer" aria-label="Hamachi the Psychotic Killer YouTube Channel">
             <img src="https://gavinoriley.github.io/assets/whiteyoutube.png" alt="YouTube Icon">
         </a>
@@ -651,7 +693,7 @@
             <img src="https://gavinoriley.github.io/assets/demonboss1.png" alt="Demon Boss 1">
             <img src="https://gavinoriley.github.io/assets/demonboss2.png" alt="Demon Boss 2">
         </div>
-        <p>Fight against powerful demons, or show them you mean now harm and pacify them!</p>
+        <p>Fight against powerful demons, or show them you mean no harm and pacify them!</p>
         
         <div class="image-container">
             <img src="https://gavinoriley.github.io/assets/policechase1.png" alt="Police Chase 1">
@@ -829,7 +871,6 @@
 
         copyLinkActionBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            // Target updated to direct users specifically to the about page
             const urlToCopy = 'https://hamachithepsychotickiller.com/about/';
             navigator.clipboard.writeText(urlToCopy).then(() => {
                 copyLinkTextNode.textContent = 'Copied!';
