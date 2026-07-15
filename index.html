@@ -55,7 +55,7 @@
             overflow-x: hidden;
         }
         
-        /* FIXED: Bulletproof Scroll Lock Class (No height property to preserve scroll coordinates) */
+        /* Bulletproof Scroll Lock Class (No height property to preserve scroll coordinates) */
         .scroll-locked {
             overflow: hidden !important;
             touch-action: none;
@@ -966,11 +966,14 @@
 
             const originalImg = activeOriginalImg;
 
+            // FIX: Restore the original image's opacity IMMEDIATELY at t=0 of the closing animation.
+            // This lets it smoothly fade in *behind* the shrinking clone, preventing any visual "blank space" or flashing.
+            if (originalImg) {
+                originalImg.style.opacity = '1';
+            }
+
             setTimeout(() => {
                 modal.style.display = 'none';
-                if (originalImg) {
-                    originalImg.style.opacity = '1';
-                }
                 activeOriginalImg = null;
                 isTransitioning = false;
             }, 400);
