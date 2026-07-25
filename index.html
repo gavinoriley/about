@@ -172,9 +172,6 @@
             color: #ff4444;
             transform: scale(1.05);
         }
-        .nav-overlay a.dev-room-link {
-            animation: demonic-glow-pulse 1.8s ease-in-out infinite;
-        }
 
         /* SYNOPSIS PANEL GRID SYSTEM */
         .synopsis-container {
@@ -399,25 +396,6 @@
             flex-shrink: 0;
         }
 
-        /* Demonic Pulse Glow Animation */
-        @keyframes demonic-glow-pulse {
-            0%, 100% {
-                text-shadow:
-                    0 0 8px #ff4444,
-                    0 0 18px #ff4444,
-                    0 0 35px #ff0000;
-            }
-            50% {
-                text-shadow:
-                    0 0 20px #ff4444,
-                    0 0 40px #ff4444,
-                    0 0 70px #ff0000,
-                    0 0 100px #ff8866,
-                    0 0 130px #ff4444,
-                    0 0 160px #ff0000;
-            }
-        }
-
         /* Content Layout */
         .logo {
             margin-top: 90px;
@@ -621,7 +599,7 @@
             <a href="https://hamachithepsychotickiller.com" class="menu-link">HOME</a>
             <a href="https://itch.io/embed-upload/16876356?color=333333" target="_blank" class="menu-link desktop-only">PLAY DEMO</a>
             <a href="https://store.steampowered.com/app/3355690/Hamachi_the_Psychotic_Killer/" target="_blank" class="menu-link">BUY GAME</a>
-            <a href="https://hamachithepsychotickiller.com/devroom/" class="dev-room-link menu-link">DEV ROOM</a>
+            <a href="https://hamachithepsychotickiller.com/devroom/" class="menu-link">DEV ROOM</a>
             <a href="mailto:img.oriley@gmail.com?subject=Contact%20from%20Hamachi%20the%20Psychotic%20Killer%20page" class="menu-link">CONTACT</a>
             <a href="#" class="menu-link" id="synopsisTriggerBtn">SYNOPSIS</a>
             <a href="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3355690/manuals/cbeecc8fd965c68b6d64b82a593dafd5da4b0412/2hamachi-the-psychotic-killer-manual.pdf?t=1746692821" target="_blank" class="menu-link" style="font-size: 20px; color: #888;">GAME MANUAL</a>
