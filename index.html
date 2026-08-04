@@ -794,17 +794,10 @@
             navOverlay.classList.toggle('open');
 
             if (isClosing) {
-                document.documentElement.classList.remove('scroll-locked');
-                document.documentElement.classList.remove('lenis-stopped');
-                if (typeof lenis !== 'undefined') lenis.start();
-
                 setTimeout(() => {
                     menuLinksWrapper.classList.remove('hidden');
                     synopsisContentPanel.classList.remove('active');
                 }, 400);
-            } else {
-                document.documentElement.classList.add('scroll-locked');
-                if (typeof lenis !== 'undefined') lenis.stop();
             }
         }
 
