@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>About Hamachi the Psychotic Killer</title>
     
     <meta name="description" content="HAMACHI THE PSYCHOTIC KILLER: The platformer game where you can play as the bad guy.">
@@ -151,7 +151,7 @@
             padding: 80px 40px 60px;
             opacity: 0;
             visibility: hidden;
-            pointer-events: none;
+            pointer-events: none; /* PREVENTS GHOST CLICK INTERCEPTION */
             transition: opacity 0.4s ease, visibility 0.4s ease;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
@@ -216,7 +216,14 @@
             margin-bottom: 20px;
             text-transform: uppercase;
         }
-        .panel p { margin-bottom: 16px; }
+        /* Critical fix: override the global white p + text-shadow so synopsis matches homepage */
+        .panel p {
+            margin-bottom: 16px;
+            color: #bbb;
+            text-shadow: none;
+            font-size: inherit;
+            line-height: inherit;
+        }
         .panel ul { list-style: none; margin: 16px 0; }
         .panel li {
             position: relative;
@@ -449,7 +456,6 @@
             cursor: url('/assets/sprCursor_3.png'), pointer;
         }
 
-        /* MOBILE RESPONSIVE ADAPTATIONS (matched to homepage) */
         @media (max-width: 700px) {
             .top-nav-bar {
                 padding-left: max(12px, env(safe-area-inset-left));
@@ -486,6 +492,9 @@
                 font-size: 16px;
                 margin-bottom: 16px;
             }
+        }
+
+        @media screen and (max-width: 768px) {
             .logo {
                 margin-top: 60px;
             }
@@ -505,23 +514,6 @@
             }
             p {
                 font-size: 18px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-socials {
-                gap: 8px;
-            }
-            .hero-socials img,
-            .share-trigger-btn svg {
-                width: 18px;
-                height: 18px;
-            }
-            .meta-line strong {
-                width: 90px;
-            }
-            .copy-email-btn {
-                width: 100%;
             }
         }
 
@@ -581,7 +573,7 @@
             <a href="https://www.youtube.com/@hamachithepsychotickiller" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
                 <img src="https://gavinoriley.github.io/assets/whiteyoutube.png" alt="YouTube">
             </a>
-            <a href="https://www.tiktok.com/@hamachi_psychotickiller" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+            <a href="https://www.tiktok.com/@hamachithepsychokiller" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
                 <img src="https://gavinoriley.github.io/assets/whitetiktok.png" alt="TikTok">
             </a>
             <a href="https://hamachithepsychotickiller.com/possession/" aria-label="Possession">
