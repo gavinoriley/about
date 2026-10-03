@@ -154,6 +154,8 @@
             pointer-events: none;
             transition: opacity 0.4s ease, visibility 0.4s ease;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
         }
         .nav-overlay.open {
             opacity: 1;
@@ -447,7 +449,43 @@
             cursor: url('/assets/sprCursor_3.png'), pointer;
         }
 
-        @media screen and (max-width: 768px) {
+        /* MOBILE RESPONSIVE ADAPTATIONS (matched to homepage) */
+        @media (max-width: 700px) {
+            .top-nav-bar {
+                padding-left: max(12px, env(safe-area-inset-left));
+                padding-right: max(12px, env(safe-area-inset-right));
+                padding-top: env(safe-area-inset-top);
+            }
+            .hero-socials {
+                gap: 10px;
+            }
+            .hero-socials img,
+            .share-trigger-btn svg {
+                width: 20px;
+                height: 20px;
+            }
+            .share-card,
+            .x-hover-card {
+                right: -4px;
+                min-width: 200px;
+            }
+            .nav-overlay {
+                padding: max(60px, calc(56px + env(safe-area-inset-top))) max(20px, env(safe-area-inset-right)) max(40px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
+            }
+            .nav-links-wrapper {
+                gap: 14px;
+            }
+            .nav-overlay a {
+                font-size: 20px;
+            }
+            .panel {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+            .panel h2 {
+                font-size: 16px;
+                margin-bottom: 16px;
+            }
             .logo {
                 margin-top: 60px;
             }
@@ -467,6 +505,23 @@
             }
             p {
                 font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-socials {
+                gap: 8px;
+            }
+            .hero-socials img,
+            .share-trigger-btn svg {
+                width: 18px;
+                height: 18px;
+            }
+            .meta-line strong {
+                width: 90px;
+            }
+            .copy-email-btn {
+                width: 100%;
             }
         }
 
@@ -526,7 +581,7 @@
             <a href="https://www.youtube.com/@hamachithepsychotickiller" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
                 <img src="https://gavinoriley.github.io/assets/whiteyoutube.png" alt="YouTube">
             </a>
-            <a href="https://www.tiktok.com/@hamachithepsychokiller" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+            <a href="https://www.tiktok.com/@hamachi_psychotickiller" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
                 <img src="https://gavinoriley.github.io/assets/whitetiktok.png" alt="TikTok">
             </a>
             <a href="https://hamachithepsychotickiller.com/possession/" aria-label="Possession">
@@ -704,6 +759,10 @@
             menuLinksWrapper.classList.add('hidden');
             synopsisContentPanel.classList.remove('active');
             contactContentPanel.classList.add('active');
+            // Reset scroll so the panel always starts at the top
+            requestAnimationFrame(() => {
+                navOverlay.scrollTop = 0;
+            });
         }
 
         menuToggle.addEventListener('click', toggleMenu);
@@ -714,6 +773,10 @@
                 menuLinksWrapper.classList.add('hidden');
                 contactContentPanel.classList.remove('active');
                 synopsisContentPanel.classList.add('active');
+                // Reset scroll so the panel always starts at the top (fixes mid-scroll + one-way swipe)
+                requestAnimationFrame(() => {
+                    navOverlay.scrollTop = 0;
+                });
             });
         }
 
