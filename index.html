@@ -50,7 +50,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'FSEX300', Arial, sans-serif;
-            cursor: url('/assets/sprCursor_3.png'), auto;
+            cursor: url('https://gavinoriley.github.io/assets/sprCursor_3.png'), auto;
         }
         body {
             background-color: black;
@@ -106,7 +106,7 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 56px;
+            height: 46px;
             z-index: 200;
             display: flex;
             align-items: center;
@@ -115,8 +115,6 @@
             background: rgba(10, 10, 10, 0.55);
             backdrop-filter: blur(18px) saturate(140%);
             -webkit-backdrop-filter: blur(18px) saturate(140%);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
         }
 
         /* MENU */
@@ -428,8 +426,12 @@
             height: auto;
             background: transparent !important;
             box-shadow: 0 0 10px #ff0000;
-            cursor: pointer;
-            transition: opacity 0.2s ease, box-shadow 0.3s ease;
+            transition: opacity 0.2s ease, box-shadow 0.3s ease, transform 0.25s ease;
+        }
+        @media (hover: hover) {
+            .image-container img:hover {
+                transform: scale(1.03);
+            }
         }
         p {
             font-size: 22px;
@@ -462,7 +464,6 @@
             transform-origin: center center;
             transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             will-change: transform;
-            cursor: zoom-out;
             box-shadow: 0 0 20px #ff0000;
             max-width: none;
             max-height: none;
@@ -473,13 +474,13 @@
             margin-top: 90px;
         }
         .top-nav-bar .menu-toggle {
-            cursor: url('/assets/sprCursor_3.png'), pointer;
+            cursor: url('https://gavinoriley.github.io/assets/sprCursor_3.png'), pointer;
         }
         .top-nav-bar .share-trigger-btn {
-            cursor: url('/assets/sprCursor_3.png'), pointer;
+            cursor: url('https://gavinoriley.github.io/assets/sprCursor_3.png'), pointer;
         }
         .copy-email-btn {
-            cursor: url('/assets/sprCursor_3.png'), pointer;
+            cursor: url('https://gavinoriley.github.io/assets/sprCursor_3.png'), pointer;
         }
 
         @media (max-width: 700px) {
@@ -850,6 +851,30 @@
         let activeOriginalImg = null;
         let isTransitioning = false;
 
+        const HOVER_SCALE = 1.03;
+        const canHover = window.matchMedia('(hover: hover)').matches;
+        let pointerX = -1;
+        let pointerY = -1;
+        let activeRect = null;
+        let closing = false;
+
+        function pointerOverActiveRect() {
+            return canHover && activeRect !== null &&
+                pointerX >= activeRect.left && pointerX <= activeRect.right &&
+                pointerY >= activeRect.top && pointerY <= activeRect.bottom;
+        }
+
+        function setReturnScale() {
+            const s = pointerOverActiveRect() ? HOVER_SCALE : 1;
+            modalImg.style.transform = `translate(0, 0) scale(${s})`;
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            pointerX = e.clientX;
+            pointerY = e.clientY;
+            if (closing && modalImg) setReturnScale();
+        });
+
         if (modal && modalImg) {
             clickableImages.forEach(img => {
                 img.addEventListener('click', () => {
@@ -857,7 +882,13 @@
                     isTransitioning = true;
                     activeOriginalImg = img;
 
+                    const wasHovered = canHover && img.matches(':hover');
+                    img.style.transition = 'none';
+                    img.style.transform = 'none';
                     const rect = img.getBoundingClientRect();
+                    img.style.transform = '';
+                    img.style.transition = '';
+                    activeRect = rect;
 
                     modalImg.src = img.src;
                     modalImg.alt = img.alt;
@@ -867,7 +898,7 @@
                     modalImg.style.height = `${rect.height}px`;
 
                     modalImg.style.transition = 'none';
-                    modalImg.style.transform = 'translate(0, 0) scale(1)';
+                    modalImg.style.transform = `translate(0, 0) scale(${wasHovered ? HOVER_SCALE : 1})`;
 
                     modal.style.display = 'block';
                     modalImg.offsetHeight; // Force reflow
@@ -921,18 +952,38 @@
                 document.documentElement.classList.remove('lenis-stopped');
                 if (typeof lenis !== 'undefined') lenis.start();
 
-                modalImg.style.transform = 'translate(0, 0) scale(1)';
+                closing = true;
+                setReturnScale();
                 modal.classList.remove('active');
 
                 const originalImg = activeOriginalImg;
 
-                if (originalImg) {
-                    originalImg.style.opacity = '1';
-                }
-
                 setTimeout(() => {
+                    const stillHovering = pointerOverActiveRect();
+                    closing = false;
+                    if (originalImg) {
+                        originalImg.style.transition = 'none';
+                        originalImg.style.opacity = '1';
+                        if (stillHovering) originalImg.style.transform = `scale(${HOVER_SCALE})`;
+                        originalImg.offsetHeight;
+                        if (stillHovering) {
+                            let released = false;
+                            const release = () => {
+                                if (released) return;
+                                released = true;
+                                originalImg.removeEventListener('mouseover', release);
+                                originalImg.style.transition = '';
+                                originalImg.style.transform = '';
+                            };
+                            originalImg.addEventListener('mouseover', release);
+                            setTimeout(release, 400);
+                        } else {
+                            originalImg.style.transition = '';
+                        }
+                    }
                     modal.style.display = 'none';
                     activeOriginalImg = null;
+                    activeRect = null;
                     isTransitioning = false;
                 }, 400);
             }
