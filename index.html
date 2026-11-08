@@ -5,18 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>About | HAMACHI THE PSYCHOTIC KILLER</title>
 
-<meta name="description" content="HAMACHI THE PSYCHOTIC KILLER: The platformer game where you can play as the bad guy.">
+<meta name="description" content="HAMACHI THE PSYCHOTIC KILLER is a 2D horror platformer game where you play as the bad guy. Kill or spare civilians while under the possession of Demon Queen Deity. Available on PC and Mac.">
 <meta name="keywords" content="Hamachi the Psychotic Killer, video game, indie game, action game, 2d game, platformer">
-<meta property="og:title" content="Hamachi the Psychotic Killer">
-<meta property="og:description" content="HAMACHI THE PSYCHOTIC KILLER: The platformer game where you can play as the bad guy.">
+<meta property="og:title" content="About | HAMACHI THE PSYCHOTIC KILLER">
+<meta property="og:description" content="HAMACHI THE PSYCHOTIC KILLER is a 2D horror platformer game where you play as the bad guy. Kill or spare civilians while under the possession of Demon Queen Deity. Available on PC and Mac.">
 <meta property="og:image" content="https://gavinoriley.github.io/assets/ScreenshotHomePage.png">
 <meta property="og:url" content="https://hamachithepsychotickiller.com/about/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Hamachi the Psychotic Killer">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Hamachi the Psychotic Killer">
-<meta name="twitter:description" content="HAMACHI THE PSYCHOTIC KILLER: The platformer game where you can play as the bad guy.">
+<meta name="twitter:title" content="About | HAMACHI THE PSYCHOTIC KILLER">
+<meta name="twitter:description" content="HAMACHI THE PSYCHOTIC KILLER is a 2D horror platformer game where you play as the bad guy. Kill or spare civilians while under the possession of Demon Queen Deity. Available on PC and Mac.">
 <meta name="twitter:image" content="https://gavinoriley.github.io/assets/ScreenshotHomePage.png">
 <meta name="twitter:site" content="@imgavinoriley">
 <meta name="robots" content="index, follow">
@@ -62,7 +62,7 @@ align-items: center;
 overflow-x: hidden;
 }
 
-
+/* 90% PERMANENT CONTENT SCALE WRAPPER */
 .page-content-wrapper {
 zoom: 0.9;
 width: 100%;
@@ -71,7 +71,7 @@ flex-direction: column;
 align-items: center;
 }
 
-
+/* Bulletproof Scroll Lock Class */
 html { scrollbar-gutter: stable; }
 
 .scroll-locked {
@@ -79,7 +79,7 @@ overflow: hidden !important;
 touch-action: none;
 }
 
-
+/* Background Video Styles */
 .background-video {
 position: fixed;
 top: 0;
@@ -91,7 +91,7 @@ z-index: -1;
 pointer-events: none;
 }
 
-
+/* Lenis Recommended Styles */
 html.lenis {
 height: auto;
 }
@@ -102,7 +102,7 @@ scroll-behavior: auto !important;
 overflow: hidden;
 }
 
-
+/* FROSTED TOP NAV BAR */
 .top-nav-bar {
 position: fixed;
 top: 0;
@@ -116,7 +116,7 @@ justify-content: space-between;
 padding: 0 22px;
 }
 
-
+/* Frosted bar background lives on a pseudo-element so only its opacity is animated (no backdrop-filter transition = no flicker) */
 .top-nav-bar::before {
 content: '';
 position: absolute;
@@ -236,7 +236,7 @@ justify-content: center;
 padding: 80px 40px 60px;
 opacity: 0;
 visibility: hidden;
-pointer-events: none; 
+pointer-events: none; /* PREVENTS GHOST CLICK INTERCEPTION */
 transition: opacity 0.4s ease, visibility 0.4s ease;
 overflow-y: auto;
 -webkit-overflow-scrolling: touch;
@@ -303,7 +303,7 @@ letter-spacing: 2px;
 margin-bottom: 20px;
 text-transform: uppercase;
 }
-
+/* Critical fix: override the global white p + text-shadow so synopsis matches homepage */
 .panel p {
 margin-bottom: 16px;
 color: #bbb;
@@ -505,7 +505,7 @@ max-width: 2000px;
 margin: 0 auto 20px auto;
 }
 
-
+/* POLISHED SMOOTH ZOOM MODAL STYLES */
 .image-modal {
 position: fixed;
 top: 0;
@@ -532,7 +532,7 @@ max-width: none;
 max-height: none;
 }
 
-
+/* Ensure page content clears the fixed frosted bar */
 .page-content-wrapper .logo {
 margin-top: 90px;
 }
@@ -654,7 +654,7 @@ font-size: 18px;
 </head>
 <body>
 
-
+<!-- Fixed Video Background Element -->
 <video autoplay loop muted playsinline class="background-video">
 <source src="https://gavinoriley.github.io/assets/3dhellfire.webm" type="video/webm">
 <source src="https://gavinoriley.github.io/assets/3dhellfire.mp4" type="video/mp4">
@@ -1105,7 +1105,7 @@ openContactPanel(e);
 </script>
 
 <script>
-
+// NAV BAR STATE SYNC (matches homepage): fades the frosted bar out while the menu overlay is open
 (function () {
 var btn = document.getElementById('menuToggleBtn');
 var overlay = document.getElementById('mainNavOverlay');
